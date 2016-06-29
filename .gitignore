@@ -1,0 +1,6 @@
+.DS_Store
+/node_modules
+npm-debug.log*
+/shapes/*.json
+/images/*.jpg
+/textures/**/*.jpg
