@@ -46,6 +46,7 @@ function createStage() {
 	renderer.setPixelRatio(renderer.getPixelRatio());
 	renderer.setClearColor(0xffffff);
 	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	$stage.append(renderer.domElement);
 	
 	// scene
@@ -62,17 +63,25 @@ function createStage() {
 	trackball = new THREE.TrackballControls(camera, $stage.get(0));
 	trackball.staticMoving = false;
 	trackball.maxDistance = 1000;
+	trackball.minDistance = 200;
 }
 
 //=========================================================
 function addLights() {
 	// directional
 	light = new THREE.DirectionalLight(0xffffff, 0.5);
-	light.position.set(-200, 100, -50);
+	light.position.set(-200, 200, 170);
 	light.castShadow = true;
 	//light.shadow.mapSize.width = 2048;
 	//light.shadow.mapSize.height = 2048;
+	light.shadow.camera.top = 300;
+	light.shadow.camera.bottom = -300;
+	light.shadow.camera.left = -300;
+	light.shadow.camera.right = 300;
 	scene.add(light);
+	
+	// helper
+	//scene.add(new THREE.CameraHelper(light.shadow.camera));
 	
 	// ambient
 	ambientLight = new THREE.AmbientLight(0xffffff);
