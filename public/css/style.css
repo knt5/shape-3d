@@ -1,0 +1,57 @@
+/* =================== base =================== */
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body, img, dl, dt, dd, ol, ul, li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+body {
+	font-size: 14px;
+	line-height: 1.4;
+	-webkit-text-size-adjust: 100%;  /* for iOS Safari */
+}
+
+body, input, select, textarea, th, td {
+	font-family: "Myriad Pro", "Lucida Grande", "GillSans", "Hiragino Kaku Gothic Pro", "Meiryo", "sans-serif";
+}
+
+h1 {
+	text-align: center;
+}
+
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+/* =================== index =================== */
+
+.index-body {
+	padding: 10px;
+}
+
+.thumb {
+	display: block;
+	float: left;
+	border: 2px solid #999;
+	border-radius: 20px;
+	margin: 10px; 0 0 10px;
+	width: 200px;
+	height: 200px;
+	background-color: #eee;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+/* =================== 3D view =================== */
