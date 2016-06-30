@@ -1,6 +1,8 @@
 .DS_Store
-/node_modules
 npm-debug.log*
-/shapes/*.json
-/images/*.jpg
-/textures/**/*.jpg
+/node_modules
+/.sass-cache/
+/public/shapes/*.json
+/public/images/*.jpg
+/public/textures/**/*.jpg
+/public/textures/**/*.png
