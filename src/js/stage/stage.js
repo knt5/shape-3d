@@ -70,7 +70,7 @@ function createStage() {
 function addLights() {
 	// directional
 	light = new THREE.DirectionalLight(0xffffff, 0.5);
-	light.position.set(-200, 200, 170);
+	light.position.set(-200, 200, 30);
 	light.castShadow = true;
 	//light.shadow.mapSize.width = 2048;
 	//light.shadow.mapSize.height = 2048;
