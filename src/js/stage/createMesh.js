@@ -134,7 +134,7 @@ function createShapes(data) {
 			if (i === 0) {
 				shape = new THREE.Shape(vectors);
 			} else {
-				//shape.holes.push(new THREE.Path(vectors));
+				shape.holes.push(new THREE.Path(vectors));
 			}
 		}
 		
