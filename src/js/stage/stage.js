@@ -2,6 +2,7 @@ import { $window, $stage } from './dom';
 import createSkyBox from './createSkyBox';
 import createMesh from './createMesh';
 import createGround from './createGround';
+import datGui from './datGui';
 
 // Parameter
 const id = getId();
@@ -15,6 +16,9 @@ let light, ambientLight;
 let skyBox;
 let mesh;
 let ground;
+
+// Light
+let sunDistance = 200;
 
 init();
 animate();
@@ -56,7 +60,7 @@ function createStage() {
 	
 	// camera
 	camera = new THREE.PerspectiveCamera(30, getAspect(), 1, 10000);
-	camera.position.set(0, 300, 500);
+	camera.position.set(0, 300, 700);
 	scene.add(camera);
 	
 	// controls
@@ -70,7 +74,11 @@ function createStage() {
 function addLights() {
 	// directional
 	light = new THREE.DirectionalLight(0xffffff, 0.5);
-	light.position.set(-200, 200, 30);
+	light.position.set(
+		sunDistance * Math.cos(datGui.config.sunDirection),
+		datGui.config.sunHeight,
+		sunDistance * Math.sin(datGui.config.sunDirection)
+	);
 	light.castShadow = true;
 	//light.shadow.mapSize.width = 2048;
 	//light.shadow.mapSize.height = 2048;
@@ -112,6 +120,11 @@ function render() {
 
 //=========================================================
 function animate() {
+	// Set light position
+	light.position.x = sunDistance * Math.cos(datGui.config.sunDirection);
+	light.position.y = datGui.config.sunHeight;
+	light.position.z = sunDistance * Math.sin(datGui.config.sunDirection);
+	
 	render();
 	requestAnimationFrame(animate);
 }
