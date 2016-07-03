@@ -1,7 +1,9 @@
 const datGui = new dat.GUI();
 const config = {
 	sunDirection: 0.97 * Math.PI,
-	sunHeight: 220
+	sunHeight: 220,
+	autoRatation: false,
+	
 };
 
 init();
@@ -16,4 +18,7 @@ export default {
 function init() {
 	datGui.add(config, 'sunDirection', 0, Math.PI * 2);
 	datGui.add(config, 'sunHeight', 0, 500);
+	datGui.add(config, 'autoRatation');
+	
+	
 }

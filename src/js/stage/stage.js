@@ -20,6 +20,11 @@ let ground;
 // Light
 let sunDistance = 200;
 
+// Camera
+let cameraRadius = 600;
+let cameraHeight = 300;
+let cameraDirection = Math.PI / 2;
+
 init();
 animate();
 
@@ -65,7 +70,11 @@ function createStage() {
 	
 	// camera
 	camera = new THREE.PerspectiveCamera(30, getAspect(), 1, 10000);
-	camera.position.set(0, 300, 700);
+	camera.position.set(
+		cameraRadius * Math.cos(cameraDirection),
+		cameraHeight,
+		cameraRadius * Math.sin(cameraDirection)
+	);
 	scene.add(camera);
 	
 	// controls
@@ -118,7 +127,6 @@ function registerEvents() {
 
 //=========================================================
 function render() {
-	trackball.update();
 	scene.updateMatrixWorld();
 	renderer.render(scene, camera);
 }
@@ -129,6 +137,16 @@ function animate() {
 	light.position.x = sunDistance * Math.cos(datGui.config.sunDirection);
 	light.position.y = datGui.config.sunHeight;
 	light.position.z = sunDistance * Math.sin(datGui.config.sunDirection);
+	
+	// Auto rotation of camera
+	if (datGui.config.autoRatation) {
+		cameraDirection += 0.002;
+		camera.position.x = cameraRadius * Math.cos(cameraDirection);
+		camera.position.z = cameraRadius * Math.sin(cameraDirection);
+		camera.lookAt(scene.position);
+	} else {
+		trackball.update();
+	}
 	
 	render();
 	requestAnimationFrame(animate);
