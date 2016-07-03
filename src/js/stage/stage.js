@@ -31,10 +31,15 @@ function init() {
 	
 	//scene.add(new THREE.GridHelper(300, 10));
 	
-	createMesh(id, (createedMesh) => {
+	createMesh(id, (createedMesh, topMesh) => {
+		// Save
 		mesh = createedMesh;
-		scene.add(mesh);
 		
+		// Add to scene
+		scene.add(mesh);
+		scene.add(topMesh);
+		
+		// Create and add ground to scene
 		ground = createGround(mesh);
 		scene.add(ground);
 	});

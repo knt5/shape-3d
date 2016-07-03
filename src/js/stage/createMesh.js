@@ -1,11 +1,14 @@
 import loadTexture from './loadTexture';
 import setTextureRepeat from './setTextureRepeat';
 
+const amount = 60;
+
 const dir = '/shapes/';
 let texturePath = '/textures/object/1.png';
 
 let texture = setTextureRepeat(loadTexture(texturePath), 1);
 let material = createMaterial();
+let topMaterial = createTopMaterial();
 
 export default function createMesh(shapeId, callback) {
 	const shape = {};
@@ -16,20 +19,34 @@ export default function createMesh(shapeId, callback) {
 	.then(
 		(data) => {
 			const shapes = createShapes(data);
+			
+			// Make 3D geometry (ExtrudeGeometry)
 			const geometries = createGeometries(shapes);
 			const geometry = mergeGeometries(geometries);
 			
+			// Make top geometry (ShapeGeometry)
+			const topGeometries = createTopGeometries(shapes);
+			const topGeometry = mergeGeometries(topGeometries);
+			
+			//-------------------------
 			// Set center (xz only)
+			// TODO: change
 			geometry.computeBoundingBox();
 			const x = (geometry.boundingBox.max.x + geometry.boundingBox.min.x) / 2;
 			const z = (geometry.boundingBox.max.z + geometry.boundingBox.min.z) / 2;
 			geometry.translate(-x, 0, -z);
+			topGeometry.translate(-x, amount + 0.1, -z);
+			//-------------------------
 			
+			// Make mesh
 			const mesh = new THREE.Mesh(geometry, material);
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
 			
-			callback(mesh);
+			// Make top mesh
+			const topMesh = new THREE.Mesh(topGeometry, topMaterial);
+			
+			callback(mesh, topMesh);
 		},
 		() => {
 			console.error(`Failed to load: ${shape.path}`);
@@ -48,13 +65,22 @@ function createMaterial() {
 }
 
 //=========================================================
+function createTopMaterial() {
+	return new THREE.MeshStandardMaterial({
+		color: 0xffffff,
+		roughness: 0.15,
+		metalness: 0.6
+	});
+}
+
+//=========================================================
 function createGeometries(shapes) {
 	const geometries = [];
 	let geometry;
 	
 	for (const shape of shapes) {
 		geometry = new THREE.ExtrudeGeometry(shape, {
-			amount: 60,
+			amount,
 			bevelThickness: 0,
 			bevelSize: 0,
 			bevelSegments: 0,
@@ -65,6 +91,20 @@ function createGeometries(shapes) {
 		
 		geometry.rotateX(-Math.PI / 2);
 		
+		geometries.push(geometry);
+	}
+	
+	return geometries;
+}
+
+//=========================================================
+function createTopGeometries(shapes) {
+	const geometries = [];
+	let geometry;
+	
+	for (const shape of shapes) {
+		geometry = new THREE.ShapeGeometry(shape);
+		geometry.rotateX(-Math.PI / 2);
 		geometries.push(geometry);
 	}
 	
