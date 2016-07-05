@@ -10,17 +10,25 @@ npm install
 
 ## Preparation to extrude 2D shapes to 3D models
 
+### Thumbnail images
+
 Put images to
 
 ```
 public/images/*.jpg
 ```
 
+### 2D Shapes
+
 Put shapes (GeoJSON, type:Polygon) to
 
 ```
 public/shapes/*.json
 ```
+
+Shapes such as these are able to make by [image-to-shape](https://github.com/knt5/image-to-shape) from any images.
+
+### Textures
 
 Put texture images to
 
