@@ -38,9 +38,4 @@ public/textures/ground/1.png
 
 # Extruded object texture
 public/textures/object/1.png
-
-# Sky box texture
-public/textures/skybox/top.png
-public/textures/skybox/bottom.png
-public/textures/skybox/side.png
 ```
