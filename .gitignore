@@ -7,3 +7,4 @@ npm-debug.log*
 /public/images/*.jpg
 /public/textures/**/*.jpg
 /public/textures/**/*.png
+!/public/textures/skybox/*.png
