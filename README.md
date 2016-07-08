@@ -26,7 +26,7 @@ Put shapes (GeoJSON, type:Polygon) to
 public/shapes/*.json
 ```
 
-Shapes such as these are able to make by [image-to-shape](https://github.com/knt5/image-to-shape) from any images.
+Shape files are able to be made by [image-to-shape](https://github.com/knt5/image-to-shape) from image files.
 
 ### Textures
 
